@@ -25,7 +25,7 @@ public class ProductoController {
         var lista = productoService.getProductos(false);
         model.addAttribute("productos", lista);
         model.addAttribute("totalProductos", lista.size());
-        return "/producto/listado"; // Refers to templates/categories.html
+        return "/producto/listad"; // Refers to templates/categories.html
     }
 
     @GetMapping("/eliminar/{idProducto}")
