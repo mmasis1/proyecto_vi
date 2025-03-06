@@ -3,27 +3,24 @@ package com.proyecto_gym.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
 @Entity
 @Table(name = "preguntas_frecuentes") //table name from the db
+public class PreguntaFrecuente {
 
-public class PreguntaFrecuente implements Serializable {
     private static final long serialVersionUID = 1L; //getter autoincremental id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPregunta;
+    private int idPreguntaFrecuente;
     private String pregunta;
     private String respuesta;
-    private boolean activo;
 
-    public Long getIdPregunta() {
-        return idPregunta;
+    public int getIdPreguntaFrecuente() {
+        return idPreguntaFrecuente;
     }
 
-    public void setIdPregunta(Long idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setIdPreguntaFrecuente(int idPreguntaFrecuente) {
+        this.idPreguntaFrecuente = idPreguntaFrecuente;
     }
 
     public String getPregunta() {
@@ -42,11 +39,4 @@ public class PreguntaFrecuente implements Serializable {
         this.respuesta = respuesta;
     }
 
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-}
+}//end class

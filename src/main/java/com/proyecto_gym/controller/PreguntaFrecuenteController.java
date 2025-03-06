@@ -2,7 +2,7 @@ package com.proyecto_gym.controller;
 
 import com.proyecto_gym.domain.PreguntaFrecuente;
 import com.proyecto_gym.service.PreguntaFrecuenteService;
-import com.proyecto_gym.service.PreguntaFrecuenteService;
+import com.proyecto_gym.service.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Controller
 @RequestMapping("/preguntafrecuente")
 public class PreguntaFrecuenteController {
-
     @Autowired
     private PreguntaFrecuenteService preguntafrecuenteService;
 
@@ -40,8 +40,6 @@ public class PreguntaFrecuenteController {
         return "/preguntafrecuente/modifica"; // Refers to the method listado
     }
 
-    @Autowired
-    //private FirebaseStorageService firebaseStorageService;
 
     @PostMapping("/guardar")
     public String guardar(PreguntaFrecuente preguntafrecuente) {
