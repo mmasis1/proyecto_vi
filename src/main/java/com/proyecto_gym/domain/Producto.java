@@ -13,8 +13,8 @@ public class Producto implements Serializable {
     private static final long serialVersionUID = 1L; //getter autoincremental id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
     private int idProducto;
-    private int idCategoria;
     private String nombre;
     private String descripcion;
     private double precio;
@@ -22,17 +22,21 @@ public class Producto implements Serializable {
     private String imagen;
     private String estado;
 
+    @ManyToOne
+    @JoinColumn(name = "idCategoria")
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
     public int getIdProducto() {
         return idProducto;
     }
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
-    }
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
     }
     public String getNombre() {
         return nombre;

@@ -44,7 +44,6 @@ public class UserController {
 
     @PostMapping("/guardar")
     public String guardar(User user) {
-
         userService.save(user);
         return "redirect:/usuario/listado"; // Refers to the method listado
     }

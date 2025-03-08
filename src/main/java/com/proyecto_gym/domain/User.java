@@ -13,24 +13,26 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
-    private int idRol;
     private String nombre;
     private String correo;
     private String contrasena;
     private Date fechaRegistro;
     private boolean estado;
+    @ManyToOne
+    @JoinColumn(name = "idRol")
+    private Rol rol;
 
+    public Rol getRol() {
+        return rol;
+    }
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
     public int getIdUsuario() {
         return idUsuario;
     }
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-    public int getIdRol() {
-        return idRol;
-    }
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
     }
     public String getNombre() {
         return nombre;
