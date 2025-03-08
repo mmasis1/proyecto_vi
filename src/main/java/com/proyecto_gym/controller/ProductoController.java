@@ -1,6 +1,7 @@
 package com.proyecto_gym.controller;
 
 import com.proyecto_gym.domain.Producto;
+import com.proyecto_gym.service.CategoriaService;
 import com.proyecto_gym.service.FirebaseStorageService;
 import com.proyecto_gym.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
+    @Autowired
+    private CategoriaService categoriaService;
 
     @GetMapping("/listado")
     public String listado(Model model) {
         var lista = productoService.getProductos(false);
         model.addAttribute("productos", lista);
         model.addAttribute("totalProductos", lista.size());
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
         return "/producto/listado"; // Refers to templates/categories.html
     }
 
@@ -38,6 +43,8 @@ public class ProductoController {
     public String modificar(Producto producto, Model model) {
         producto = productoService.getProducto(producto);
         model.addAttribute("producto", producto);
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
         return "/producto/modifica"; // Refers to the method listado
     }
 
