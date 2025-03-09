@@ -1,5 +1,6 @@
 package com.proyecto_gym.controller;
 
+import com.proyecto_gym.domain.Categoria;
 import com.proyecto_gym.domain.Producto;
 import com.proyecto_gym.service.CategoriaService;
 import com.proyecto_gym.service.FirebaseStorageService;
@@ -7,10 +8,7 @@ import com.proyecto_gym.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -31,6 +29,15 @@ public class ProductoController {
         var categorias = categoriaService.getCategorias(false);
         model.addAttribute("categorias", categorias);
         return "/producto/listado"; // Refers to templates/categories.html
+    }
+
+    @GetMapping("/listado/{idCategoria}")
+    public String listado(Model model, Categoria categoria) {
+        categoria = categoriaService.getCategoria(categoria);
+        model.addAttribute("productos", categoria.getProductos());
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+        return "/producto/listado";
     }
 
     @GetMapping("/eliminar/{idProducto}")
