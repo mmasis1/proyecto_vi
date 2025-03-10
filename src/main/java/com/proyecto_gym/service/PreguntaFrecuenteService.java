@@ -11,12 +11,12 @@ import java.util.List;
 @Service
 public class PreguntaFrecuenteService {
     @Autowired
-    private PreguntaFrecuenteRepository preguntafrecuenteRepository;
+    private PreguntaFrecuenteRepository preguntaFrecuenteRepository;
 
     @Transactional(readOnly = true)
     public List<PreguntaFrecuente> getPreguntaFrecuentes(boolean activos) {
         {
-            var lista = preguntafrecuenteRepository.findAll();
+            var lista = preguntaFrecuenteRepository.findAll();
             return lista;
         }
     }
@@ -25,23 +25,23 @@ public class PreguntaFrecuenteService {
 
     //read
     @Transactional(readOnly = true)
-    public PreguntaFrecuente getPreguntaFrecuente(PreguntaFrecuente preguntafrecuente) {
+    public PreguntaFrecuente getPreguntaFrecuente(PreguntaFrecuente preguntaFrecuente) {
         {
-            preguntafrecuente = preguntafrecuenteRepository.findById(preguntafrecuente.getIdPreguntaFrecuente()).orElse(null);
-            return preguntafrecuente;
+            preguntaFrecuente = preguntaFrecuenteRepository.findById(preguntaFrecuente.getIdPregunta()).orElse(null);
+            return preguntaFrecuente;
         }
     }
 
     //delete
     @Transactional
-    public void delete(PreguntaFrecuente preguntafrecuente) {
+    public void delete(PreguntaFrecuente preguntaFrecuente) {
         //if id is no valid, will not affect the db
-        preguntafrecuenteRepository.delete(preguntafrecuente);
+        preguntaFrecuenteRepository.delete(preguntaFrecuente);
     }
 
     @Transactional
-    public void save(PreguntaFrecuente preguntafrecuente) {
-        //if the idpreguntafrecuente have already a value will update the row, if not will insert a new row
-        preguntafrecuenteRepository.save(preguntafrecuente);
+    public void save(PreguntaFrecuente preguntaFrecuente) {
+        //if the idpreguntaFrecuente have already a value will update the row, if not will insert a new row
+        preguntaFrecuenteRepository.save(preguntaFrecuente);
     }
 }
