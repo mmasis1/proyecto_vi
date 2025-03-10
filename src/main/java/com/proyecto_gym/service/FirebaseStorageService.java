@@ -22,17 +22,17 @@ import java.util.concurrent.TimeUnit;
 public class FirebaseStorageService {
 
     //El BuketName es el <id_del_proyecto> + ".appspot.com"
-    final String BucketName = "tienda-fc208.firebasestorage.app";
+    final String BucketName = "gimnasio-91429.firebasestorage.app";
 
     
     //Esta es la ruta básica de este proyecto Techshop
-    final String rutaSuperiorStorage = "techshop_kdelgado";
+    final String rutaSuperiorStorage = "gimnasio";
 
     //Ubicación donde se encuentra el archivo de configuración Json
     final String rutaJsonFile = "firebase";
 
     //El nombre del archivo Json
-    final String archivoJsonFile = "tienda-fc208-firebase-adminsdk-fbsvc-2ce5a8a4b6"+".json";
+    final String archivoJsonFile = "gimnasio-91429-firebase-adminsdk-fbsvc-26f164cca1"+".json";
 
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, int id) {
         try {
