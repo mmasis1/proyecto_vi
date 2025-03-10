@@ -11,16 +11,16 @@ public class PreguntaFrecuente {
     private static final long serialVersionUID = 1L; //getter autoincremental id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPreguntaFrecuente;
+    private int idPregunta;
     private String pregunta;
     private String respuesta;
 
     public int getIdPreguntaFrecuente() {
-        return idPreguntaFrecuente;
+        return idPregunta;
     }
 
-    public void setIdPreguntaFrecuente(int idPreguntaFrecuente) {
-        this.idPreguntaFrecuente = idPreguntaFrecuente;
+    public void setIdPreguntaFrecuente(int idPregunta) {
+        this.idPregunta = idPregunta;
     }
 
     public String getPregunta() {

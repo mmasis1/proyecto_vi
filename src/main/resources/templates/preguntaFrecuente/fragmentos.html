@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Preguntas Frecuentes - Gabriel Gym</title>
+        <meta charset="UTF-8"/>        
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarPreguntaFrecuente">
+                            <i class="fas fa-plus"></i> Agregar Pregunta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar pregunta frecuente, es la ventana modal -->
+        <section th:fragment="agregarPreguntaFrecuente">
+            <div id="agregarPreguntaFrecuente" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Agregar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/preguntaFrecuente/guardar}" th:object="${preguntaFrecuente}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="pregunta">Pregunta</label>
+                                    <input type="text" class="form-control" name="pregunta" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="respuesta">Respuesta</label>
+                                    <input type="text" class="form-control" name="respuesta" required="true"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Sección principal para mostrar la información de la entidad preguntaFrecuente -->
+        <section th:fragment="listado" id="preguntaFrecuente">
+            <div class="container mt-4">
+                <h2 class="text-center">Preguntas Frecuentes</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="card" th:each="p, iter : ${preguntaFrecuentes}">
+                        <div class="card-header d-flex justify-content-between align-items-center" id="heading-[[${iter.index}]]">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                                        th:attr="data-bs-target='#collapse-'+${iter.index}" aria-expanded="false"
+                                        th:aria-controls="'collapse-'+${iter.index}">
+                                    [[${p.pregunta}]]
+                                </button>
+                            </h5>
+                            <div>
+                                <a th:href="@{/preguntaFrecuente/modificar/}+${p.idPregunta}" class="btn btn-sm btn-success">
+                                    <i class="fas fa-pencil-alt"></i> Editar
+                                </a>
+                                <a th:href="@{/preguntaFrecuente/eliminar/}+${p.idPregunta}" class="btn btn-sm btn-danger"
+                                   onclick="return confirm('¿Estás seguro de eliminar esta pregunta?');">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </a>
+                            </div>
+                        </div>
+                        <div th:id="'collapse-'+${iter.index}" class="collapse" aria-labelledby="heading-[[${iter.index}]]"
+                             data-bs-parent="#faqAccordion">
+                            <div class="card-body">
+                                [[${p.respuesta}]]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarPreguntaFrecuente">
+            <div class="row p-3">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/preguntaFrecuente/guardar}" 
+                          th:object="${preguntaFrecuente}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idPregunta" th:field="*{idPregunta}"/>
+                        <div class="row py-4 mb-4 bg-light">
+                            <div class="col-md-4 d-grid">
+                                <a th:href="@{/categoria/listado}" class="btn btn-primary">
+                                    <i class="fas fa-arrow-left"></i> Volver
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">                                
+                                <a th:href="@{/preguntaFrecuente/eliminar/}+${preguntaFrecuente.idPregunta}"
+                                   class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>Eliminar
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i> Modificar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Modificar</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="pregunta">Pregunta</label>
+                                        <input type="text" class="form-control" 
+                                               name="pregunta" th:field="*{pregunta}"
+                                               required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="respuesta">Respuesta</label>
+                                        <input type="text" class="form-control" 
+                                               name="respuesta" th:field="*{respuesta}"
+                                               required="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

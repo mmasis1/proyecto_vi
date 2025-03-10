@@ -14,36 +14,36 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-@RequestMapping("/preguntafrecuente")
+@RequestMapping("/preguntaFrecuente")
 public class PreguntaFrecuenteController {
     @Autowired
-    private PreguntaFrecuenteService preguntafrecuenteService;
+    private PreguntaFrecuenteService preguntaFrecuenteService;
 
     @GetMapping("/listado")
     public String listado(Model model) {
-        var lista = preguntafrecuenteService.getPreguntaFrecuentes(false);
-        model.addAttribute("preguntafrecuentes", lista);
+        var lista = preguntaFrecuenteService.getPreguntaFrecuentes(false);
+        model.addAttribute("preguntaFrecuentes", lista);
         model.addAttribute("totalPreguntaFrecuentes", lista.size());
-        return "/preguntafrecuente/listado"; // Refers to templates/categories.html
+        return "/preguntaFrecuente/listado";
     }
 
-    @GetMapping("/eliminar/{idPreguntaFrecuente}")
-    public String eliminar(PreguntaFrecuente preguntafrecuente) {
-        preguntafrecuenteService.delete(preguntafrecuente);
-        return "redirect:/preguntafrecuente/listado"; // Refers to the method listado
+    @GetMapping("/eliminar/{idPregunta}")
+    public String eliminar(PreguntaFrecuente preguntaFrecuente) {
+        preguntaFrecuenteService.delete(preguntaFrecuente);
+        return "redirect:/preguntaFrecuente/listado"; // Refers to the method listado
     }
 
-    @GetMapping("/modificar/{idPreguntaFrecuente}")
-    public String modificar(PreguntaFrecuente preguntafrecuente, Model model) {
-        preguntafrecuente = preguntafrecuenteService.getPreguntaFrecuente(preguntafrecuente);
-        model.addAttribute("preguntafrecuente", preguntafrecuente);
-        return "/preguntafrecuente/modifica"; // Refers to the method listado
+    @GetMapping("/modificar/{idPregunta}")
+    public String modificar(PreguntaFrecuente preguntaFrecuente, Model model) {
+        preguntaFrecuente = preguntaFrecuenteService.getPreguntaFrecuente(preguntaFrecuente);
+        model.addAttribute("preguntaFrecuente", preguntaFrecuente);
+        return "/preguntaFrecuente/modifica"; // Refers to the method listado
     }
 
 
     @PostMapping("/guardar")
-    public String guardar(PreguntaFrecuente preguntafrecuente) {
-        preguntafrecuenteService.save(preguntafrecuente);
-        return "redirect:/preguntafrecuente/listado"; // Refers to the method listado
+    public String guardar(PreguntaFrecuente preguntaFrecuente) {
+        preguntaFrecuenteService.save(preguntaFrecuente);
+        return "redirect:/preguntaFrecuente/listado"; // Refers to the method listado
     }
 }

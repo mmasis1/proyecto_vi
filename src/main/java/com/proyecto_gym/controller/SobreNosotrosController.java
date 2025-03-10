@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-@RequestMapping("/sobrenosotros")
+@RequestMapping("/sobreNosotros")
 public class SobreNosotrosController {
     @Autowired
     private SobreNosotrosService sobrenosotrosService;
@@ -22,28 +22,28 @@ public class SobreNosotrosController {
     @GetMapping("/listado")
     public String listado(Model model) {
         var lista = sobrenosotrosService.getSobreNosotross(false);
-        model.addAttribute("sobrenosotross", lista);
+        model.addAttribute("sobreNosotross", lista);
         model.addAttribute("totalSobreNosotross", lista.size());
-        return "/sobrenosotros/listado"; // Refers to templates/categories.html
+        return "/sobreNosotros/listado"; // Refers to templates/sobreNosotros.html
     }
 
     @GetMapping("/eliminar/{idInfo}")
-    public String eliminar(SobreNosotros sobrenosotros) {
-        sobrenosotrosService.delete(sobrenosotros);
-        return "redirect:/sobrenosotros/listado"; // Refers to the method listado
+    public String eliminar(SobreNosotros sobreNosotros) {
+        sobrenosotrosService.delete(sobreNosotros);
+        return "redirect:/sobreNosotros/listado"; // Refers to the method listado
     }
 
     @GetMapping("/modificar/{idInfo}")
-    public String modificar(SobreNosotros sobrenosotros, Model model) {
-        sobrenosotros = sobrenosotrosService.getSobreNosotros(sobrenosotros);
-        model.addAttribute("sobrenosotros", sobrenosotros);
-        return "/sobrenosotros/modifica"; // Refers to the method listado
+    public String modificar(SobreNosotros sobreNosotros, Model model) {
+        sobreNosotros = sobrenosotrosService.getSobreNosotros(sobreNosotros);
+        model.addAttribute("sobreNosotros", sobreNosotros);
+        return "/sobreNosotros/modifica"; // Refers to the method listado
     }
 
 
     @PostMapping("/guardar")
-    public String guardar(SobreNosotros sobrenosotros) {
-        sobrenosotrosService.save(sobrenosotros);
-        return "redirect:/sobrenosotros/listado"; // Refers to the method listado
+    public String guardar(SobreNosotros sobreNosotros) {
+        sobrenosotrosService.save(sobreNosotros);
+        return "redirect:/sobreNosotros/listado"; // Refers to the method listado
     }
 }
