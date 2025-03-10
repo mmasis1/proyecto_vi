@@ -41,8 +41,16 @@ public class PlanMembresiaController {
     }
 
 
+    @Autowired
+    private FirebaseStorageService firebaseStorageService;
+
     @PostMapping("/guardar")
-    public String guardar(PlanMembresia planMembresia) {
+    public String guardar(PlanMembresia planMembresia, @RequestParam("imagenFile") MultipartFile imagenFile) {
+        if (!imagenFile.isEmpty()) {
+            planMembresiaService.save(planMembresia);
+            String ruta = firebaseStorageService.cargaImagen(imagenFile, "planMembresia", planMembresia.getIdPlan());
+            planMembresia.setRutaImagen(ruta);
+        }
         planMembresiaService.save(planMembresia);
         return "redirect:/planMembresia/listado"; // Refers to the method listado
     }
