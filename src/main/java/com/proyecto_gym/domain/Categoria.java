@@ -4,6 +4,8 @@ package com.proyecto_gym.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "categoria") //table name from the db
@@ -14,6 +16,17 @@ public class Categoria {
     private int idCategoria;
     private String nombreCategoria;
 
+    @OneToMany
+    @JoinColumn(name = "idCategoria")
+    private List<Producto> productos;
+
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
     public int getIdCategoria() {
         return idCategoria;
     }

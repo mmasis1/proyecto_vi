@@ -2,7 +2,8 @@ package com.proyecto_gym.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Date;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -13,7 +14,16 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
     private String nombreRol;
+    @OneToMany
+    @JoinColumn(name = "idRol")
+    private List<User> usuarios;
 
+    public List<User> getUsuarios() {
+        return usuarios;
+    }
+    public void setUsuarios(List<User> usuarios) {
+        this.usuarios = usuarios;
+    }
     public int getIdRol() {
         return idRol;
     }
