@@ -4,117 +4,64 @@
     <head th:replace="~{layout/plantilla :: head}">
         <title>Gabriel Gym</title>
         <meta charset="UTF-8"/>
-        <style>
-            body {
-                font-family: 'Arial', sans-serif;
-                background-color: #f8f9fa;
-                margin: 0;
-                padding: 0;
-            }
-            .container {
-                max-width: 1200px;
-                margin: 40px auto;
-                padding: 20px;
-            }
-            h2 {
-                text-align: center;
-                font-size: 2.5rem;
-                color: #333;
-                margin-bottom: 40px;
-            }
-            .info-section {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-                justify-items: center;
-                margin-bottom: 40px;
-            }
-            .info-section .info-box {
-                background-color: #fff;
-                border-radius: 15px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                text-align: center;
-                width: 100%;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .info-section .info-box:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            }
-            .info-box .icon {
-                font-size: 50px;
-                color: #2b8a3e;
-                margin-bottom: 15px;
-            }
-            .info-box h3 {
-                font-size: 1.8rem;
-                color: #333;
-                margin-bottom: 15px;
-            }
-            .info-box p {
-                font-size: 1rem;
-                color: #555;
-                line-height: 1.6;
-                margin-top: 10px;
-            }
-            /* Segunda fila (Historia y Valores) */
-            .info-section-bottom {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-                justify-items: center;
-            }
-        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <body>
         <section th:fragment="listado" id="sobreNosotros">
-            <div class="container">
-                <h2>¡Conoce Más Sobre Nosotros!</h2>
-                <!-- Fila 1: Misión y Visión -->
-                <div class="info-section">
+            <div class="container mt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-primary">Conoce Más Sobre Nosotros</h2>
+                    <p class="text-muted">Descubre nuestra misión, visión, historia y valores.</p>
+                </div>
 
+                <div class="row g-4">
                     <!-- Misión -->
-                    <div class="info-box">
-                        <div class="icon">
-                            <i class="fas fa-bullhorn"></i>
+                    <div class="col-md-6" th:if="${sobreNosotross != null and sobreNosotross.size() > 0}">
+                        <div class="card shadow-lg border-0 rounded-4 h-100" style="background-color: #fff8e1;">
+                            <div class="card-header text-center" style="background-color: #ffcc00; color: white;">
+                                <h5><i class="fas fa-bullseye"></i> Misión</h5>
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${sobreNosotross[0].mision}" class="text-secondary"></p>
+                            </div>
                         </div>
-                        <h3>Misión</h3>
-                        <p th:text="${sobreNosotross[0].mision}"></p>
                     </div>
-
                     <!-- Visión -->
-                    <div class="info-box">
-                        <div class="icon">
-                            <i class="fas fa-eye"></i>
+                    <div class="col-md-6" th:if="${sobreNosotross != null and sobreNosotross.size() > 0}">
+                        <div class="card shadow-lg border-0 rounded-4 h-100" style="background-color: #fff3e0;">
+                            <div class="card-header text-center" style="background-color: #ffb300; color: white;">
+                                <h5><i class="fas fa-eye"></i> Visión</h5>
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${sobreNosotross[0].vision}" class="text-secondary"></p>
+                            </div>
                         </div>
-                        <h3>Visión</h3>
-                        <p th:text="${sobreNosotross[0].vision}"></p>
                     </div>
                 </div>
-
-                <!-- Fila 2: Historia y Valores -->
-                <div class="info-section-bottom">
-
+                <div class="row g-4 mt-3">
                     <!-- Historia -->
-                    <div class="info-box">
-                        <div class="icon">
-                            <i class="fas fa-history"></i>
+                    <div class="col-md-6" th:if="${sobreNosotross != null and sobreNosotross.size() > 0}">
+                        <div class="card shadow-lg border-0 rounded-4 h-100" style="background-color: #ffecb3;">
+                            <div class="card-header text-center" style="background-color: #ff9800; color: white;">
+                                <h5><i class="fas fa-history"></i> Historia</h5>
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${sobreNosotross[0].historia}" class="text-secondary"></p>
+                            </div>
                         </div>
-                        <h3>Historia</h3>
-                        <p th:text="${sobreNosotross[0].historia}"></p>
                     </div>
-
                     <!-- Valores -->
-                    <div class="info-box">
-                        <div class="icon">
-                            <i class="fas fa-handshake"></i>
+                    <div class="col-md-6" th:if="${sobreNosotross != null and sobreNosotross.size() > 0}">
+                        <div class="card shadow-lg border-0 rounded-4 h-100" style="background-color: #fff9c4;">
+                            <div class="card-header text-center" style="background-color: #ff5722; color: white;">
+                                <h5><i class="fas fa-heart"></i> Valores</h5>
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${sobreNosotross[0].valores}" class="text-secondary"></p>
+                            </div>
                         </div>
-                        <h3>Valores</h3>
-                        <p th:text="${sobreNosotross[0].valores}"></p>
                     </div>
                 </div>
-
             </div>
         </section>
     </body>
