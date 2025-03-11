@@ -2,19 +2,21 @@ package com.proyecto_gym.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "metodo_pago") // Nombre de la tabla en la base de datos
-public class MetodoPago {
+public class MetodoPago implements Serializable {
     private static final long serialVersionUID = 1L; // Serialización
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_metodo_pago")
     private int idMetodoPago;
     private String nombreMetodo;
 
-    // Getter y Setter para idMetodoPago
     public int getIdMetodoPago() {
         return idMetodoPago;
     }
@@ -23,7 +25,6 @@ public class MetodoPago {
         this.idMetodoPago = idMetodoPago;
     }
 
-    // Getter y Setter para nombreMetodo
     public String getNombreMetodo() {
         return nombreMetodo;
     }
