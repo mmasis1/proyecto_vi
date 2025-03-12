@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+<!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+<section class="py-4 mb-4 bg-light" th:fragment="btnAgregar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button
+                        class="btn btn-primary btn-block"
+                        data-bs-target="#agregarUsuario"
+                        data-bs-toggle="modal"
+                        type="button">
+                    <i class="fas fa-plus"></i> [[#{usuario.agregar}]]
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 2 Fragmento para agregar usuario, es la ventana modal -->
+<section th:fragment="agregarUsuario">
+    <div aria-hidden="true"
+         aria-labelledby="exampleModalLabel"
+         class="modal fade"
+         id="agregarUsuario"
+         tabindex="-1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">[[#{usuario.agregar}]]</h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <form class="was-validated" enctype="multipart/form-data"
+                      method="POST" th:action="@{/usuario/guardar}" th:object="${usuario}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Rol Usuario</label>
+                            <select class="form-select" name="idRol">
+                                <option value="1">Admin</option>
+                                <option value="2">Usuario</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>[[#{usuario.nombre}]]</label>
+                            <input class="form-control" name="nombre" required="true" type="text"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Correo</label>
+                            <input class="form-control" name="correo" required="true" type="text"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>contrasena</label>
+                            <input class="form-control" name="contrasena" required="true" type="password"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Fecha de Registro</label>
+                            <input class="form-control" name="fechaRegistro" required="true" type="date"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Activo? </label>
+                            <input class="form-check-input" id="estado" name="estado" type="checkbox"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 3 Sección para mostrar las tabs de los usuarios -->
+<section th:fragment="tabs">
+    <div class="row p-3">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a aria-current="page" class="nav-link active" href="/usuario/listado/">Todos</a>
+            </li>
+            <li class="nav-item" th:each="r : ${roles}">
+                <a class="nav-link" th:href="@{/usuario/listado/{idRol}(idRol=${r.idRol})}">[[${r.nombreRol}]]</a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- 4 Sección para mostrar las tarjetas de los usuarios -->
+<section th:fragment="tarjetas">
+    <div class="accordion" id="userAccordion">
+        <div class="accordion-item" th:each="p : ${usuarios}">
+            <h2 class="accordion-header" th:attr="id='heading' + ${p.idUsuario}">
+                <button class="accordion-button collapsed" type="button"
+                        th:attr="data-bs-toggle='collapse', data-bs-target='#collapse' + ${p.idUsuario}, aria-controls='collapse' + ${p.idUsuario}">
+                    [[${p.nombre}]]
+                </button>
+            </h2>
+            <div th:attr="id='collapse' + ${p.idUsuario}, aria-labelledby='heading' + ${p.idUsuario}" class="accordion-collapse collapse" data-bs-parent="#userAccordion">
+                <div class="accordion-body">
+                    <strong>Email:</strong> [[${p.correo}]]<br>
+                    <strong>Role:</strong> [[${p.rol.nombreRol}]]<br>
+                    <strong>Registration Date:</strong> [[${p.fechaRegistro}]]<br>
+                    <strong>Status:</strong> [[${p.estado} ? 'Active' : 'Inactive']]
+                </div>
+                <a class="btn btn-success"
+                   th:href="@{/usuario/modificar/}+${p.idUsuario}">
+                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                </a>
+                <a th:href="@{/usuario/eliminar/}+${p.idUsuario}">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section th:fragment="editarUsuario">
+    <div class="row p-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form class="was-validated"
+                  enctype="multipart/form-data"
+                  method="POST"
+                  th:action="@{/usuario/guardar}"
+                  th:object="${usuario}">
+                <input name="idUsuario" th:field="*{idUsuario}" type="hidden"/>
+                <div class="row py-4 mb-4 bg-light">
+                    <div class="col-md-4 d-grid">
+                        <a class="btn btn-primary" th:href="@{/usuario/listado}">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <a class="btn btn-danger"
+                           th:href="@{/usuario/eliminar/}+${usuario.idUsuario}">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>[[#{accion.actualizar}]]</h4>
+                        </div>
+                        <div class="mb-3">
+                            <label>[[#{usuario.nombre}]]</label>
+                            <input class="form-control" name="nombre" required="true" type="text" th:field="*{nombre}"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>[[#{usuario.correo}]]</label>
+                            <input class="form-control" name="correo" type="text" th:field="*{correo}"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Contrasena Usuario</label>
+                            <input class="form-control" name="contrasena" required="true" type="password" th:field="*{contrasena}"/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Rol Usuario</label>
+                            <select class="form-select" name="idRol" th:field="*{rol.idRol}">
+                                <option value="1">Admin</option>
+                                <option value="2">Usuario</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Activo?</label>
+                            <input class="form-check-input" id="estado" name="estado" type="checkbox" th:field="*{estado}"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
