@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://wwww.tymeleaf.org"
-    xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6">
+      xmlns:th="http://wwww.tymeleaf.org"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Gabriel Gym</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
+
+
+        <section class="hero container mt-4">
+            <h1>¡Bienvenido a GABRIEL GYM!</h1>
+            <p>Tu transformación comienza hoy. Encuentra la energía, disciplina y comunidad que necesitas para alcanzar tus objetivos. ¡Entrena con nosotros y supera tus límites!</p>
+        </section>
+
+        <!-- Sección de ubicación -->
+        <div class="container mt-4 mb-5">
+            <div class="location-container">
+                <div class="location text-dark">
+                    <h5>Encuéntranos en:</h5>
+                    <p><strong>Turrucares de Alajuela</strong></p>
+                    <p><strong>Horarios:</strong></p>
+                    <ul>
+                        <li>Lunes a Viernes: 5:30AM - 9:00PM</li>
+                        <li>Sábados: 8:00AM - 1:00PM</li>
+                    </ul>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.7137115847886!2d-84.32652222460086!3d9.957760390145502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa05691c9ac3c73%3A0xb9a88c2e23104cf2!2sPlaza%20Portillos!5e0!3m2!1ses-419!2scr!4v1741587114499!5m2!1ses-419!2scr" 
+                            width="100%" height="300px" style="border:0;" allowfullscreen="" loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
 
         <footer th:replace="~{layout/plantilla :: footer}"/>
 
