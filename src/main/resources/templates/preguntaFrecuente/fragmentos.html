@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Preguntas Frecuentes - Gabriel Gym</title>
-        <meta charset="UTF-8"/>        
+        <meta charset="UTF-8"/>
     </head>
     <body>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
@@ -13,10 +13,10 @@
                     <div class="col-md-3">   
                         <button 
                             type="button" 
-                            class="btn btn-primary btn-block" 
+                            class="btn btn-custom-primary btn-block" 
                             data-bs-toggle="modal" 
                             data-bs-target="#agregarPreguntaFrecuente">
-                            <i class="fas fa-plus"></i> Agregar Pregunta
+                            <i class="fas fa-plus"></i> Agregar Pregunta Frecuente
                         </button>
                     </div>
                 </div>
@@ -25,17 +25,17 @@
 
         <!-- 2 Fragmento para agregar pregunta frecuente, es la ventana modal -->
         <section th:fragment="agregarPreguntaFrecuente">
-            <div id="agregarPreguntaFrecuente" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
+            <div id="agregarPreguntaFrecuente"
+                 class="modal fade"
+                 tabindex="-1"
+                 aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
+                        <div class="modal-header">
                             <h5 class="modal-title">Agregar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
+                        </div>
                         <form th:action="@{/preguntaFrecuente/guardar}" th:object="${preguntaFrecuente}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
@@ -45,11 +45,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="respuesta">Respuesta</label>
-                                    <input type="text" class="form-control" name="respuesta" required="true"/>
+                                    <textarea class="form-control" name="respuesta" required="true"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-custom" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -67,16 +67,17 @@
                             <h5 class="mb-0">
                                 <button class="btn btn-link" type="button" data-bs-toggle="collapse"
                                         th:attr="data-bs-target='#collapse-'+${iter.index}" aria-expanded="false"
-                                        th:aria-controls="'collapse-'+${iter.index}">
+                                        th:aria-controls="'collapse-'+${iter.index}"
+                                        style="color: black; font-weight: bold; text-decoration: none;">
                                     [[${p.pregunta}]]
                                 </button>
                             </h5>
+
                             <div>
-                                <a th:href="@{/preguntaFrecuente/modificar/}+${p.idPregunta}" class="btn btn-sm btn-success">
+                                <a th:href="@{/preguntaFrecuente/modificar/}+${p.idPregunta}" class="btn btn-custom-secondary">
                                     <i class="fas fa-pencil-alt"></i> Editar
                                 </a>
-                                <a th:href="@{/preguntaFrecuente/eliminar/}+${p.idPregunta}" class="btn btn-sm btn-danger"
-                                   onclick="return confirm('¿Estás seguro de eliminar esta pregunta?');">
+                                <a th:href="@{/preguntaFrecuente/eliminar/}+${p.idPregunta}" class="btn btn-custom-secondary">
                                     <i class="fas fa-trash"></i> Eliminar
                                 </a>
                             </div>
@@ -109,7 +110,7 @@
                                     <i class="fas fa-arrow-left"></i> Volver
                                 </a>
                             </div>
-                            <div class="col-md-4 d-grid">                                
+                            <div class="col-md-4 d-grid">                                 
                                 <a th:href="@{/preguntaFrecuente/eliminar/}+${preguntaFrecuente.idPregunta}"
                                    class="btn btn-danger">
                                     <i class="fas fa-trash"></i>Eliminar
@@ -146,6 +147,5 @@
                 </div>
             </div>
         </section>
-
     </body>
 </html>

@@ -1,119 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>Plan Membresia - Gabriel Gym</title>
-        <meta charset="UTF-8"/>        
-        <style>
-            /* Botón con fondo amarillo */
-            .btn-custom-primary {
-                background-color: #FFD700; /* Amarillo */
-                color: #4A4A4A;
-                border-radius: 30px;
-                padding: 10px 20px;
-                text-transform: uppercase;
-                font-weight: bold;
-                border: none;
-            }
-
-            .btn-custom-primary:hover {
-                background-color: #f7e300; /* Amarillo más fuerte */
-                color: #fff;
-            }
-
-            /* Botón Editar */
-            .btn-custom-edit {
-                background-color: #FFD700;
-                color: #4A4A4A;
-                border-radius: 30px;
-                padding: 8px 16px;
-                text-transform: uppercase;
-                font-weight: bold;
-                border: none;
-            }
-
-            .btn-custom-edit:hover {
-                background-color: #f7e300;
-                color: #fff;
-            }
-
-            /* Botón Eliminar */
-            .btn-custom-delete {
-                background-color: #FFD700;
-                color: #4A4A4A;
-                border-radius: 30px;
-                padding: 8px 16px;
-                text-transform: uppercase;
-                font-weight: bold;
-                border: none;
-            }
-
-            .btn-custom-delete:hover {
-                background-color: #f7e300;
-                color: #fff;
-            }
-
-            /* Botón de la ventana modal */
-            .modal-header {
-                background-color: #FFD700; /* Amarillo */
-                color: #4A4A4A;
-            }
-
-            /* Cabecera del card en amarillo */
-            .card-header {
-                background-color: #FFD700;
-                color: #4A4A4A;
-                font-weight: bold;
-            }
-
-            /* Fondo de los botones en la tarjeta */
-            .card-footer .btn-sm {
-                background-color: #FFD700;
-                color: #4A4A4A;
-                border-radius: 30px;
-                padding: 8px 16px;
-                text-transform: uppercase;
-                font-weight: bold;
-                border: none;
-            }
-
-            .card-footer .btn-sm:hover {
-                background-color: #f7e300;
-                color: #fff;
-            }
-        </style>
+        <title>Plan Membresía - Gabriel Gym</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
-        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-        <section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+        <!-- 1 Sección para crear el botón de agregar... llamará a una ventana modal -->
+        <section th:fragment="btnAgregar" class="py-4 mb-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">   
-                        <button 
-                            type="button" 
-                            class="btn btn-custom-primary btn-block" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#agregarPreguntaFrecuente">
-                            <i class="fas fa-plus"></i> Agregar Plan Membresia
+                    <div class="col-md-3">
+                        <button
+                            type="button"
+                            class="btn btn-custom"
+                            data-bs-toggle="modal"
+                            data-bs-target="#agregarPlanMembresia">
+                            <i class="fas fa-plus"></i> Agregar Plan Membresía
                         </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2 Fragmento para agregar pregunta frecuente, es la ventana modal -->
+        <!-- 2 Fragmento para agregar plan de membresía, es la ventana modal -->
         <section th:fragment="agregarPlanMembresia">
-            <div id="agregarPreguntaFrecuente" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
+            <div id="agregarPlanMembresia"
+                 class="modal fade"
+                 tabindex="-1"
+                 aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Agregar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
+                        </div>
                         <form th:action="@{/planMembresia/guardar}" th:object="${planMembresia}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
@@ -140,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-custom-primary" type="submit">Guardar</button>
+                                <button class="btn btn-custom" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -151,7 +72,7 @@
         <!-- 3 Sección principal para mostrar la información de la entidad planMembresia -->
         <section th:fragment="listado" id="planMembresia">
             <div class="d-flex flex-wrap justify-content-center gap-4 p-3">
-                <div th:each="p : ${planMembresias}" class="animate__animated animate__fadeInUp">
+                <div th:each="p : ${planMembresias}">
                     <div class="card shadow-lg border-0 rounded-4 overflow-hidden text-center" style="width: 20rem;">
                         <div class="card-header">
                             [[${p.nombrePlan}]]
@@ -162,17 +83,14 @@
                             <p class="text-muted mb-2">Duración: [[${p.duracionMeses}]] meses</p>
                             <p class="text-secondary flex-grow-1">[[${p.descripcion}]]</p>
                         </div>
-                        <div class="card-footer bg-light border-0 d-flex justify-content-between">
-                            <!-- Botón Editar -->
-                            <a th:href="@{/planMembresia/modificar/}+${p.idPlan}" class="btn btn-custom-edit">
+                        <div class="card-footer d-flex justify-content-between">
+                            <a th:href="@{/planMembresia/modificar/}+${p.idPlan}" class="btn btn-custom-secondary">
                                 <i class="fas fa-pencil-alt"></i> Editar
                             </a>
-                            <!-- Botón Eliminar -->
-                            <a th:href="@{/planMembresia/eliminar/}+${p.idPlan}" class="btn btn-custom-delete">
+                            <a th:href="@{/planMembresia/eliminar/}+${p.idPlan}" class="btn btn-custom-secondary">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
-                            <!-- Botón Inscribirme -->
-                            <button class="btn btn-custom-primary">
+                            <button class="btn btn-custom">
                                 <i class="fas fa-cart-arrow-down"></i> Inscribirme
                             </button>
                         </div>
@@ -186,74 +104,25 @@
             <div class="row p-3">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form method="POST"
-                          th:action="@{/planMembresia/guardar}" 
-                          th:object="${planMembresia}"
-                          class="was-validated"                          
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="idPlan" th:field="*{idPlan}"/>
-                        <div class="row py-4 mb-4 bg-light">
-                            <div class="col-md-4 d-grid">
-                                <a th:href="@{/planMembresia/listado}" class="btn btn-custom-primary">
-                                    <i class="fas fa-arrow-left"></i> Volver
-                                </a>
-                            </div>
-                            <div class="col-md-4 d-grid">                                 
-                                <a th:href="@{/planMembresia/eliminar/}+${planMembresia.idPlan}"
-                                   class="btn btn-custom-delete">
-                                    <i class="fas fa-trash"></i>Eliminar
-                                </a>
-                            </div>
-                            <div class="col-md-4 d-grid">
-                                <button type="submit" class="btn btn-custom-primary">
-                                    <i class="fas fa-check"></i> Modificar
-                                </button>
-                            </div>
+                    <form method="POST" th:action="@{/planMembresia/guardar}" th:object="${planMembresia}"
+                          class="was-validated" enctype="multipart/form-data">
+                        <input type="hidden" name="idPlan" th:value="${planMembresia.idPlan}"/>
+                        <div class="mb-3">
+                            <label for="nombrePlan">Nombre del Plan</label>
+                            <input class="form-control" type="text" name="nombrePlan" th:field="*{nombrePlan}" required="true"/>
                         </div>
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Modificar Plan</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="nombrePlan">Nombre</label>
-                                        <input type="text" class="form-control" 
-                                               name="nombrePlan" th:field="*{nombrePlan}"
-                                               required="true"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="precio">Precio</label>
-                                        <input type="number" class="form-control" 
-                                               name="precio" th:field="*{precio}"
-                                               required="true"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="duracionMeses">Duración (meses)</label>
-                                        <input type="number" class="form-control" 
-                                               name="duracionMeses" th:field="*{duracionMeses}"
-                                               required="true"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="descripcion">Descripción</label>
-                                        <textarea class="form-control" 
-                                                  name="descripcion" th:field="*{descripcion}" 
-                                                  required="true"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="imagen">Imagen</label>
-                                        <input class="form-control" type="file" 
-                                               name="imagenFile" 
-                                               onchange="readURL(this);"/>
-                                        <img id="blah" src="#" alt="your image" height="200"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
+                        <div class="mb-3">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" name="descripcion" th:field="*{descripcion}" required="true"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagenFile">Imagen</label>
+                            <input type="file" class="form-control" name="imagenFile" onchange="readURL(this);"/>
+                            <img id="blah" th:src="${planMembresia.rutaImagen}" height="200" alt="Imagen"/>
+                        </div>
                     </form>
                 </div>
-            </div>
+            </div>        
         </section>
-
     </body>
 </html>
