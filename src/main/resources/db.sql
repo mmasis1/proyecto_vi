@@ -14,7 +14,7 @@ CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     correo VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
     id_rol INT NOT NULL,  
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado bool,
