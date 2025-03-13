@@ -47,3 +47,4 @@ public class PreguntaFrecuenteController {
         return "redirect:/preguntaFrecuente/listado"; // Refers to the method listado
     }
 }
+
