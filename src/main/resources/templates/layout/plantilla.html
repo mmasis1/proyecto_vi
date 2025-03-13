@@ -88,7 +88,7 @@
     <body>
         <header th:fragment="header" class="header">
             <nav class="navbar navbar-light bg-light px-3">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="../">
                     <img th:src="@{/imagenes/LogoGYM.jpg}" alt="Gabriel Gym" height="40">
                 </a>
 
@@ -106,7 +106,7 @@
                     <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Ayuda</button>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a class="nav-link" th:href="@{/preguntaFrecuente/listado}">Preguntas Frecuentes</a></li>
-                        <li class="dropdown-item" th:href="@{/preguntaFrecuente/listado}">Contactenos</li>
+                        <li class="dropdown-item"><a class="nav-link" th:href="@{/formularioContacto/listado}">Contactenos</a></li>
                     </ul>
                 </div>
 
