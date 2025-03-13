@@ -111,6 +111,14 @@
                         <li><a class="dropdown-item" th:href="@{/contacto}">Contacto</a></li>
                     </ul>
                 </div>
+                
+                <div class="dropdown d-inline-block">
+                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Mantenimientos</button>
+                    <ul class="dropdown-menu">
+                         <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/metodoPago/listado}">Metodos de Pago</a></li>
+                    </ul>
+                </div>
 
                 <div class="ms-auto">
                     <a class="btn btn-warning text-dark me-2" th:href="@{/inscripcion}" style="border-radius: 30px;">Inscríbete</a>

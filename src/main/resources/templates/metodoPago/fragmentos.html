@@ -13,10 +13,10 @@
                     <div class="col-md-3">   
                         <button 
                             type="button" 
-                            class="btn btn-primary btn-block" 
+                            class="btn btn-custom-primary btn-block" 
                             data-bs-toggle="modal" 
                             data-bs-target="#agregarMetodoPago">
-                            <i class="fas fa-plus"></i> Agregar Metodo Pago
+                            <i class="fas fa-plus"></i> Nuevo Metodo de Pago
                         </button>
                     </div>
                 </div>
@@ -25,27 +25,27 @@
 
         <!-- 2 Fragmento para agregar metodoPago, es la ventana modal -->
         <section th:fragment="agregarMetodoPago">
-            <div id="agregarMetodoPago" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
+            <div id="agregarMetodoPago"
+                 class="modal fade"
+                 tabindex="-1"
+                 aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">[[#{metodoPago.agregar}]]</h5>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Agregar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
+                        </div>
                         <form th:action="@{/metodoPago/guardar}" th:object="${metodoPago}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="nombreMetodo">[[#{metodoPago.descripcion}]]</label>
+                                    <label for="nombreMetodo">Metodo de Pago</label>
                                     <input type="text" class="form-control" name="nombreMetodo" required="true"/>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-custom" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -74,10 +74,10 @@
                                         <td>[[${c.idMetodoPago}]]</td>
                                         <td>[[${c.nombreMetodo}]]</td>
                                         <td><a th:href="@{/metodoPago/eliminar/}+${c.idMetodoPago}"
-                                               class="btn btn-danger">
+                                               class="btn btn-custom-secondary">
                                                 <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                             <a th:href="@{/metodoPago/modificar/}+${c.idMetodoPago}"
-                                               class="btn btn-success">
+                                               class="btn btn-custom-secondary">
                                                 <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a>
                                         </td>
                                     </tr>
@@ -104,18 +104,18 @@
                         <input type="hidden" name="idMetodoPago" th:field="*{idMetodoPago}"/>
                         <div class="row py-4 mb-4 bg-light">
                             <div class="col-md-4 d-grid">
-                                <a th:href="@{/metodoPago/listado}" class="btn btn-primary">
+                                <a th:href="@{/metodoPago/listado}" class="btn btn-custom-secondary">
                                     <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                                 </a>
                             </div>
                             <div class="col-md-4 d-grid">                                
                                 <a th:href="@{/metodoPago/eliminar/}+${metodoPago.idMetodoPago}"
-                                   class="btn btn-danger">
+                                   class="btn btn-custom-secondary">
                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                 </a>
                             </div>
                             <div class="col-md-4 d-grid">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-custom-secondary">
                                     <i class="fas fa-check"></i> [[#{accion.guardar}]]
                                 </button>
                             </div>
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="nombreMetodo">[[#{metodoPago.descripcion}]]</label>
+                                        <label for="nombreMetodo">[[#{metodoPago.nombreMetodo}]]</label>
                                         <input type="text" class="form-control" 
                                                name="nombreMetodo" th:field="*{nombreMetodo}"
                                                required="true"/>
