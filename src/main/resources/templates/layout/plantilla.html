@@ -97,9 +97,7 @@
                     <ul class="dropdown-menu">
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/sobreNosotros/listado}">Sobre Nosotros</a></li>
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/planMembresia/listado}">Planes Membresias</a></li>
-                        <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
-                        <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios</a></li>
-                        <li><a class="dropdown-item" th:href="@{/categoria/listado}">Categorías</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">Categorías</a></li>
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/producto/listado}">Productos</a></li>
                     </ul>
                 </div>
@@ -107,22 +105,29 @@
                 <div class="dropdown d-inline-block">
                     <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Ayuda</button>
                     <ul class="dropdown-menu">
-                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/preguntaFrecuente/listado}">Preguntas Frecuentes</a></li>
-                        <li><a class="dropdown-item" th:href="@{/contacto}">Contacto</a></li>
+                        <li class="dropdown-item" th:href="@{/preguntaFrecuente/listado}">Preguntas Frecuentes</li>
+                        <li class="dropdown-item" th:href="@{/preguntaFrecuente/listado}">Contactenos</li>
                     </ul>
                 </div>
-                
+
                 <div class="dropdown d-inline-block">
                     <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Mantenimientos</button>
                     <ul class="dropdown-menu">
-                         <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
                         <li class="nav-item px-2"><a class="nav-link" th:href="@{/metodoPago/listado}">Metodos de Pago</a></li>
                     </ul>
                 </div>
 
+                <div class="dropdown d-inline-block">
+                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Gestión de Usuarios</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
+                        <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios</a></li>
+                    </ul>
+                </div>
+
                 <div class="ms-auto">
-                    <a class="btn btn-warning text-dark me-2" th:href="@{/inscripcion}" style="border-radius: 30px;">Inscríbete</a>
-                    <a class="btn" th:href="@{/perfil-cliente}" style="background-color: #d3d3d3; color: black; border-radius: 30px;">Perfil Cliente</a>
+                    <a class="btn btn-warning text-dark me-2" th:href="@{/login/listado}" style="border-radius: 30px;">Inscríbete</a>
+                    <a class="btn" th:href="@{/perfilPersona/listado}" style="background-color: #d3d3d3; color: black; border-radius: 30px;">Mi Perfil</a>
                 </div>
             </nav>
         </header>
