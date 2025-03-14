@@ -16,20 +16,12 @@ public class FormularioContacto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contacto")
     private int idContacto;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private User usuario;  // Aquí asociamos el usuario que hizo el contacto
-
+    private int idUsuario;
     private String asunto;
-
-    @Lob  // Para que el campo mensaje sea de tipo texto largo
+    private Date fechaEnvio;
     private String mensaje;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha_envio", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date fechaEnvio;
-
+    
     public int getIdContacto() {
         return idContacto;
     }
@@ -38,12 +30,12 @@ public class FormularioContacto {
         this.idContacto = idContacto;
     }
 
-    public User getUsuario() {
-        return usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getAsunto() {
