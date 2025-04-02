@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
+      xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Plan Membresía - Gabriel Gym</title>
         <meta charset="UTF-8"/>
@@ -9,13 +11,16 @@
         <section th:fragment="btnAgregar" class="py-4 mb-4">
             <div class="container">
                 <div class="row">
+                    <div class="card-header text-center">
+                        <h4>Membresías Actuales</h4>
+                    </div>
                     <div class="col-md-3">
                         <button
                             type="button"
                             class="btn btn-custom"
                             data-bs-toggle="modal"
                             data-bs-target="#agregarPlanMembresia">
-                            <i class="fas fa-plus"></i> Agregar Plan Membresía
+                            <i class="fas fa-plus"></i> Nueva Membresía
                         </button>
                     </div>
                 </div>
@@ -104,9 +109,29 @@
             <div class="row p-3">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form method="POST" th:action="@{/planMembresia/guardar}" th:object="${planMembresia}"
-                          class="was-validated" enctype="multipart/form-data">
+                    <form method="POST" th:action="@{/planMembresia/guardar}" 
+                          th:object="${planMembresia}"
+                          class="was-validated" 
+                          enctype="multipart/form-data">
                         <input type="hidden" name="idPlan" th:value="${planMembresia.idPlan}"/>
+                        <div class="row py-4 mb-4 bg-light">
+                            <div class="col-md-4 d-grid">
+                                <a th:href="@{/planMembresia/listado}" class="btn btn-custom-secondary">
+                                    <i class="fas fa-arrow-left"></i> Volver
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">                                 
+                                <a class="btn btn-custom-secondary">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <button type="submit" class="btn btn-custom-secondary">
+                                    <i class="fas fa-check"></i> Modificar
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label for="nombrePlan">Nombre del Plan</label>
                             <input class="form-control" type="text" name="nombrePlan" th:field="*{nombrePlan}" required="true"/>

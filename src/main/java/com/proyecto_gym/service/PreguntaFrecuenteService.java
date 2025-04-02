@@ -45,3 +45,4 @@ public class PreguntaFrecuenteService {
         preguntafrecuenteRepository.save(preguntafrecuente);
     }
 }
+

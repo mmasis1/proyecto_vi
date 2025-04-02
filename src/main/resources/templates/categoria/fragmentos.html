@@ -1,123 +1,128 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/plantilla :: head}">
-    <meta charset="UTF-8"/>
-</head>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Categorias - Gabriel Gym</title>
+        <meta charset="UTF-8"/>
+    </head>
 
-<body>
-<!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-<section class="py-4 mb-4 bg-light" th:fragment="btnAgregar">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <button
-                        class="btn btn-primary btn-block"
-                        data-bs-target="#agregarCategoria"
-                        data-bs-toggle="modal"
-                        type="button">
-                    <i class="fas fa-plus"></i> [[#{categoria.agregar}]]
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- 2 Fragmento para agregar producto, es la ventana modal -->
-<section th:fragment="agregarCategoria">
-    <div aria-hidden="true"
-         aria-labelledby="exampleModalLabel"
-         class="modal fade"
-         id="agregarCategoria"
-         tabindex="-1">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title">[[#{categoria.agregar}]]</h5>
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-                </div>
-                <form class="was-validated" enctype="multipart/form-data"
-                      method="POST" th:action="@{/categoria/guardar}" th:object="${categoria}">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label>Categoria</label>
-                        </div>
-                        <div class="mb-3">
-                            <label>Nombre de Categoria</label>
-                            <input class="form-control" name="nombreCategoria" required="true" type="text"/>
-                        </div>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section class="py-4 mb-4 bg-light" th:fragment="btnAgregar">
+            <div class="container">
+                <div class="row">
+                    <div class="card-header text-center">
+                        <h4>Categorias</h4>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 4 Sección para mostrar las tarjetas de los productos -->
-<section th:fragment="tarjetas">
-    <div class="row row-cols-4 p-2 d-flex justify-content-center">
-        <div class="card" style="width: 18rem;" th:each="p : ${categorias}">
-            <h5 class="card-title">[[${p.nombreCategoria}]]</h5>
-            <div style="display: flex; gap: 10px;">
-                <a th:href="@{/categoria/modificar/}+${p.idCategoria}">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </a>
-                <a th:href="@{/categoria/eliminar/}+${p.idCategoria}">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section th:fragment="editarCategoria">
-    <div class="row p-3">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form class="was-validated"
-                  enctype="multipart/form-data"
-                  method="POST"
-                  th:action="@{/categoria/guardar}"
-                  th:object="${categoria}">
-                <input name="idCategoria" th:field="*{idCategoria}" type="hidden"/>
-                <div class="row py-4 mb-4 bg-light">
-                    <div class="col-md-4 d-grid">
-                        <a class="btn btn-primary" th:href="@{/categoria/listado}">
-                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">
-                        <a class="btn btn-danger"
-                           th:href="@{/categoria/eliminar/}+${categoria.idCategoria}">
-                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
-                        </a>
-                    </div>
-                    <div class="col-md-4 d-grid">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                    <div class="col-md-3">
+                        <button
+                            class="btn btn-custom-primary btn-block"
+                            data-bs-target="#agregarCategoria"
+                            data-bs-toggle="modal"
+                            type="button">
+                            <i class="fas fa-plus"></i> [[#{categoria.agregar}]]
                         </button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>[[#{accion.actualizar}]]</h4>
+            </div>
+        </section>
+        <!-- 2 Fragmento para agregar producto, es la ventana modal -->
+        <section th:fragment="agregarCategoria">
+            <div aria-hidden="true"
+                 aria-labelledby="exampleModalLabel"
+                 class="modal fade"
+                 id="agregarCategoria"
+                 tabindex="-1">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{categoria.agregar}]]</h5>
+                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                         </div>
-                        <div class="mb-3">
-                            <label>Nombre Categoria</label>
-                            <input class="form-control" name="nombreCategoria" required="true" type="text" th:field="*{nombreCategoria}"/>
-                        </div>
+                        <form class="was-validated" enctype="multipart/form-data"
+                              method="POST" th:action="@{/categoria/guardar}" th:object="${categoria}">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label>Categoria</label>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Nombre de Categoria</label>
+                                    <input class="form-control" name="nombreCategoria" required="true" type="text"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-</section>
-</body>
+            </div>
+        </section>
+
+        <!-- 4 Sección para mostrar las tarjetas de los productos -->
+        <section th:fragment="tarjetas">
+            <div class="row row-cols-4 p-2 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;" th:each="p : ${categorias}">
+                    <h5 class="card-title">[[${p.nombreCategoria}]]</h5>
+                    <div style="display: flex; gap: 10px;">
+                        <a th:href="@{/categoria/modificar/}+${p.idCategoria}">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </a>
+                        <a th:href="@{/categoria/eliminar/}+${p.idCategoria}">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="editarCategoria">
+            <div class="row p-3">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form class="was-validated"
+                          enctype="multipart/form-data"
+                          method="POST"
+                          th:action="@{/categoria/guardar}"
+                          th:object="${categoria}">
+                        <input name="idCategoria" th:field="*{idCategoria}" type="hidden"/>
+                        <div class="row py-4 mb-4 bg-light">
+                            <div class="col-md-4 d-grid">
+                                <a class="btn btn-primary" th:href="@{/categoria/listado}">
+                                    <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <a class="btn btn-danger"
+                                   th:href="@{/categoria/eliminar/}+${categoria.idCategoria}">
+                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                </a>
+                            </div>
+                            <div class="col-md-4 d-grid">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>[[#{accion.actualizar}]]</h4>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Nombre Categoria</label>
+                                    <input class="form-control" name="nombreCategoria" required="true" type="text" th:field="*{nombreCategoria}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Inicio de Sesión - Gabriel Gym</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+
+        <section th:fragment="listado" id="listado">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card shadow-lg border-0 rounded-4">
+                            <div class="card-body p-5">
+                                <h2 class="fw-bold text-center text-warning mb-4">Perfil del Cliente</h2>
+
+                                <!-- Foto de perfil -->
+                                <div class="text-center mb-4">
+                                    <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 120px; height: 120px;">
+                                </div>
+
+                                <!-- Información del cliente -->
+                                <div class="mb-3">
+                                    <h5 class="text-primary">Nombre</h5>
+                                    <p class="text-secondary" sec:authentication="name">nombre</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="text-primary">Correo electrónico</h5>
+                                    <p class="text-secondary">juan.perez@correo.com</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="text-primary">Teléfono</h5>
+                                    <p class="text-secondary">+1 234 567 890</p>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="text-primary">Dirección</h5>
+                                    <p class="text-secondary">Calle Ficticia 123, Ciudad</p>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <form th:method="post" th:action="@{/logout}">
+                                    <button class="btn btn-warning">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 50px;"></div>
+        </section>
+    </body>
+</html>

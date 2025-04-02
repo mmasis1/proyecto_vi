@@ -3,17 +3,16 @@
       xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>Gabriel Gym</title>
+        <title>Contacto - Gabriel Gym</title>
         <meta charset="UTF-8"/>        
-
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
-  
-        <section th:replace="~{metodoPago/fragmentos :: btnAgregar}"/>
-        <section th:replace="~{metodoPago/fragmentos :: agregarMetodoPago}"/> 
-        <section th:replace="~{metodoPago/fragmentos :: listado}"/>
 
+        <section th:replace="~{formularioContacto/fragmentos :: btnAgregar}"/>
+        <section th:replace="~{formularioContacto/fragmentos :: agregarFormularioContacto}"/> 
+        <section th:replace="~{formularioContacto/fragmentos :: listado}"/>
+        
         <footer th:replace="~{layout/plantilla :: footer}"/>
     </body>
 </html>
