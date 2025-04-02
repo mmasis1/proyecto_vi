@@ -66,6 +66,6 @@ public class ProductoController {
             producto.setImagen(ruta);
         }
         productoService.save(producto);
-        return "redirect:/producto/listado"; // Refers to the method listado
+        return "redirect:/producto/listado"; // Refers to the method listado  
     }
 }

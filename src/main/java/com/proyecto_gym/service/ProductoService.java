@@ -43,5 +43,8 @@ public class ProductoService {
         //if the idproducto have already a value will update the row, if not will insert a new row
         productoRepository.save(producto);
     }
-
+    @Transactional(readOnly = true)
+    public List<Producto> consultaAmpliada(double precioInf, double precioSup) {
+        return productoRepository.findByPrecioBetweenOrderByPrecio(precioInf, precioSup);
+    }
 }

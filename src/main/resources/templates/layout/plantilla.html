@@ -89,7 +89,7 @@
         <header th:fragment="header" class="header">
             <nav class="navbar navbar-light bg-light px-3">
                 <a class="navbar-brand" href="../">
-                    <img th:src="@{/imagenes/LogoGYM.jpg}" alt="Gabriel Gym" height="40">
+                     <img src="/js/imagenes/logogym.jpg" alt="Gabriel Gym" height="50">
                 </a>
 
                 <div class="dropdown d-inline-block me-3">
@@ -107,6 +107,7 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a class="nav-link" th:href="@{/preguntaFrecuente/listado}">Preguntas Frecuentes</a></li>
                         <li class="dropdown-item"><a class="nav-link" th:href="@{/formularioContacto/listado}">Contactenos</a></li>
+                        <li class="dropdown-item"><a class="nav-link" th:href="@{/pruebas/listado2}">Filtros</a></li>
                     </ul>
                 </div>
 
@@ -134,7 +135,7 @@
 
         <footer th:fragment="footer" class="footer">
             <div>
-                <img th:src="@{/imagenes/logo.jpeg}" alt="Gabriel Gym" height="50">
+               <img src="/js/imagenes/logogym.jpg" alt="Gabriel Gym" height="50">
             </div>
             <div>
                 <h5>Red Social</h5>
