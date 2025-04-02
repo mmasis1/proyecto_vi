@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Usuarios - Gabriel Gym</title>
@@ -169,7 +170,7 @@
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label>Contrasena Usuario</label>
-                                                                    <input class="form-control" name="contrasena" required="true" type="password" th:field="*{contrasena}"/>
+                                                                    <input class="form-control" name="contrasena" type="password" th:field="*{contrasena}"/>
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label>Rol Usuario</label>

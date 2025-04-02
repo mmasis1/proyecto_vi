@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Inicio de Sesión - Gabriel Gym</title>
@@ -23,7 +24,7 @@
                                 <!-- Información del cliente -->
                                 <div class="mb-3">
                                     <h5 class="text-primary">Nombre</h5>
-                                    <p class="text-secondary">Juan Pérez</p>
+                                    <p class="text-secondary" sec:authentication="name">nombre</p>
                                 </div>
                                 <div class="mb-3">
                                     <h5 class="text-primary">Correo electrónico</h5>
@@ -38,9 +39,12 @@
                                     <p class="text-secondary">Calle Ficticia 123, Ciudad</p>
                                 </div>
 
-                                <!-- Botón para editar perfil -->
                                 <div class="text-center mt-4">
-                                    <a href="#" class="btn btn-warning">Editar Perfil</a>
+                                    <form th:method="post" th:action="@{/logout}">
+                                    <button class="btn btn-warning">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,150 +1,159 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
       xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Gabriel Gym</title>
-        <meta charset="UTF-8"/>
-        <link rel="icon" th:href="@{/fav/favicon-16x16.png}" type="image/png"/>
+<head>
+    <title>Gabriel Gym</title>
+    <meta charset="UTF-8"/>
+    <link rel="icon" th:href="@{/fav/favicon-16x16.png}" type="image/png"/>
 
-        <script th:src="@{/js/rutinas.js}"></script>
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/rutinas.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+        /* Estilos generales */
+        body {
+            background: url('URL_DE_TU_IMAGEN') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-        <style>
-            /* Estilos generales */
-            body {
-                background: url('URL_DE_TU_IMAGEN') no-repeat center center fixed;
-                background-size: cover;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+        .hero {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 10px;
+        }
 
-            .hero {
-                background: rgba(0, 0, 0, 0.6);
-                color: white;
-                text-align: center;
-                padding: 80px 20px;
-                border-radius: 10px;
-            }
+        .dropdown-menu {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-            .dropdown-menu {
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
+        .location-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
 
-            .location-container {
-                display: flex;
-                gap: 20px;
-                align-items: center;
-            }
+        .location {
+            background: #ffcc00;
+            padding: 15px;
+            border-radius: 5px;
+            flex: 1;
+        }
 
-            .location {
-                background: #ffcc00;
-                padding: 15px;
-                border-radius: 5px;
-                flex: 1;
-            }
+        .map-container {
+            flex: 1;
+        }
 
-            .map-container {
-                flex: 1;
-            }
+        /* Pie de página corregido */
+        .footer {
+            background: #000;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: relative; /* Corregido */
+            margin-top: auto; /* Ajusta para que no se superponga */
+        }
 
-            /* Pie de página corregido */
-            .footer {
-                background: #000;
-                color: white;
-                padding: 20px 0;
-                text-align: center;
-                width: 100%;
-                position: relative; /* Corregido */
-                margin-top: auto; /* Ajusta para que no se superponga */
-            }
+        .footer div {
+            padding: 10px 0;
+            border-bottom: 1px solid white;
+            max-width: 80%;
+            margin: auto;
+        }
 
-            .footer div {
-                padding: 10px 0;
-                border-bottom: 1px solid white;
-                max-width: 80%;
-                margin: auto;
-            }
+        .footer div:last-child {
+            border-bottom: none;
+        }
 
-            .footer div:last-child {
-                border-bottom: none;
-            }
+        .navbar {
+            padding: 20px 15px;
+        }
 
-            .navbar {
-                padding: 20px 15px;
-            }
+        .navbar-brand img {
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+<header class="header" th:fragment="header">
+    <nav class="navbar navbar-light bg-light px-3">
+        <a class="navbar-brand" href="../">
+            <img alt="Gabriel Gym" height="40" th:src="@{/imagenes/LogoGYM.jpg}">
+        </a>
 
-            .navbar-brand img {
-                height: 60px;
-            }
-        </style>
-    </head>
-    <body>
-        <header th:fragment="header" class="header">
-            <nav class="navbar navbar-light bg-light px-3">
-                <a class="navbar-brand" href="../">
-                    <img th:src="@{/imagenes/LogoGYM.jpg}" alt="Gabriel Gym" height="40">
-                </a>
+        <div class="dropdown d-inline-block me-3">
+            <button class="btn text-dark dropdown-toggle" data-bs-toggle="dropdown" type="button">Experiencia GABGYM
+            </button>
+            <ul class="dropdown-menu">
+                <li class="nav-item px-2"><a class="nav-link" th:href="@{/sobreNosotros/listado}">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item px-2"><a class="nav-link" th:href="@{/planMembresia/listado}">Planes Membresias</a>
+                </li>
+                <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">Categorías</a></li>
+                <li class="nav-item px-2"><a class="nav-link" th:href="@{/producto/listado}">Productos</a></li>
+            </ul>
+        </div>
 
-                <div class="dropdown d-inline-block me-3">
-                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Experiencia GABGYM</button>
-                    <ul class="dropdown-menu">
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/sobreNosotros/listado}">Sobre Nosotros</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/planMembresia/listado}">Planes Membresias</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">Categorías</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/producto/listado}">Productos</a></li>
-                    </ul>
-                </div>
+        <div class="dropdown d-inline-block">
+            <button class="btn text-dark dropdown-toggle" data-bs-toggle="dropdown" type="button">Ayuda</button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item"><a class="nav-link" th:href="@{/preguntaFrecuente/listado}">Preguntas
+                    Frecuentes</a></li>
+                <li class="dropdown-item"><a class="nav-link" th:href="@{/formularioContacto/listado}">Contactenos</a>
+                </li>
+            </ul>
+        </div>
 
-                <div class="dropdown d-inline-block">
-                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Ayuda</button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a class="nav-link" th:href="@{/preguntaFrecuente/listado}">Preguntas Frecuentes</a></li>
-                        <li class="dropdown-item"><a class="nav-link" th:href="@{/formularioContacto/listado}">Contactenos</a></li>
-                    </ul>
-                </div>
+        <div class="dropdown d-inline-block" sec:authorize='hasRole("ROLE_ADMIN")'>
+            <button class="btn text-dark dropdown-toggle" data-bs-toggle="dropdown" type="button">Mantenimientos
+            </button>
+            <ul class="dropdown-menu">
+                <li class="nav-item px-2"><a class="nav-link" th:href="@{/metodoPago/listado}">Metodos de Pago</a></li>
+            </ul>
+        </div>
 
-                <div class="dropdown d-inline-block">
-                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Mantenimientos</button>
-                    <ul class="dropdown-menu">
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/metodoPago/listado}">Metodos de Pago</a></li>
-                    </ul>
-                </div>
+        <div class="dropdown d-inline-block" sec:authorize='hasRole("ROLE_ADMIN")'>
+            <button class="btn text-dark dropdown-toggle" data-bs-toggle="dropdown" type="button">Gestión de Usuarios
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
+                <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios</a></li>
+            </ul>
+        </div>
 
-                <div class="dropdown d-inline-block">
-                    <button class="btn text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Gestión de Usuarios</button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/rol/listado}">Roles</a></li>
-                        <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios</a></li>
-                    </ul>
-                </div>
+        <div class="ms-auto">
+            <ul>
+                <a class="btn btn-warning text-dark me-2" sec:authorize="!isAuthenticated" style="border-radius: 30px;" th:href="@{/login}">Ingresar</a>
+                <a class="btn" style="background-color: #d3d3d3; color: black; border-radius: 30px;" sec:authorize="isAuthenticated" th:href="@{/perfilPersona/listado}">Mi Perfil</a>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-                <div class="ms-auto">
-                    <a class="btn btn-warning text-dark me-2" th:href="@{/login/listado}" style="border-radius: 30px;">Inscríbete</a>
-                    <a class="btn" th:href="@{/perfilPersona/listado}" style="background-color: #d3d3d3; color: black; border-radius: 30px;">Mi Perfil</a>
-                </div>
-            </nav>
-        </header>
-
-        <footer th:fragment="footer" class="footer">
-            <div>
-                <img th:src="@{/imagenes/logo.jpeg}" alt="Gabriel Gym" height="50">
-            </div>
-            <div>
-                <h5>Red Social</h5>
-            </div>
-            <div>
-                <p>@gabrielgym11</p>
-            </div>
-            <div>
-                <p>WhatsApp: 71637197*</p>
-            </div>
-        </footer>
-    </body>
+<footer class="footer" th:fragment="footer">
+    <div>
+        <img alt="Gabriel Gym" height="50" th:src="@{/imagenes/logo.jpeg}">
+    </div>
+    <div>
+        <h5>Red Social</h5>
+    </div>
+    <div>
+        <p>@gabrielgym11</p>
+    </div>
+    <div>
+        <p>WhatsApp: 71637197*</p>
+    </div>
+</footer>
+</body>
 </html>
