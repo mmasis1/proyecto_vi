@@ -19,7 +19,7 @@ public class User implements Serializable {
     private Date fechaRegistro;
     private boolean estado;
     @ManyToOne
-    @JoinColumn(name = "idRol")
+    @JoinColumn(name = "id_rol")
     private Rol rol;
 
     public Rol getRol() {

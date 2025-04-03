@@ -15,7 +15,7 @@ public class Rol {
     private int idRol;
     private String nombreRol;
     @OneToMany
-    @JoinColumn(name = "idRol")
+    @JoinColumn(name = "id_rol")
     private List<User> usuarios;
 
     public List<User> getUsuarios() {
