@@ -64,4 +64,12 @@ public class User implements Serializable {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    @PrePersist
+    public void prePersist() {
+        if (this.rol == null) {
+            this.rol = new Rol();
+            this.rol.setIdRol(2); // Set default role ID here
+        }
+    }
 }//end class
