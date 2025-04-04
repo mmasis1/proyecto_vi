@@ -1,6 +1,5 @@
 package com.proyecto_gym.service;
 
-import com.proyecto_gym.domain.Rol;
 import com.proyecto_gym.domain.User;
 import com.proyecto_gym.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByNombre(username);
-
-
 
         //user validation
         if (user == null) {

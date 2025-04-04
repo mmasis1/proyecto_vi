@@ -19,10 +19,6 @@ public class UserService {
             return lista;
         }
     }
-
-    // CRUD methods
-
-    //read
     @Transactional(readOnly = true)
     public User getUser(User user) {
         {
@@ -30,15 +26,32 @@ public class UserService {
             return user;
         }
     }
-
-    //delete
     @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
-
     @Transactional
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUsuarioPorUsername(String username) {
+        return userRepository.findByNombre(username);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUsuarioPorUsernameYPassword(String username, String password) {
+        return userRepository.findByNombreAndContrasena(username, password);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUsuarioPorUsernameOCorreo(String username, String correo) {
+        return userRepository.findByNombreOrCorreo(username, correo);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean existeUsuarioPorUsernameOCorreo(String username, String correo) {
+        return userRepository.existsByNombreOrCorreo(username, correo);
     }
 }
