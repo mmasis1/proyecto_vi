@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Editar Producto del Carrito - Gabriel Gym</title>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <main class="container my-4">
+        <section th:replace="~{carrito/fragmentos :: editarItem}"></section>
+    </main>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

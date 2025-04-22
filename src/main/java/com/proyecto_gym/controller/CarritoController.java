@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,7 +46,31 @@ public class CarritoController {
     @GetMapping("/listado")
     public String listado(Model model) {
         var lista = itemService.getItems();
+        var totalCompra = itemService.getTotal();
         model.addAttribute("listaItems", lista);
+        model.addAttribute("totalCompra", totalCompra);
         return "/carrito/listado";
+    }
+
+    //Eliminar un item del carrito
+    @GetMapping("/eliminar/{idProducto}")
+    public String eliminar(Model model, Item item) {
+        itemService.delete(item);
+        return "redirect:/carrito/listado";
+    }
+
+    //Cargar datos para modificar cantidad de un producto
+    @GetMapping("/modificar/{idProducto}")
+    public String modificar(Model model, Item item) {
+        item = itemService.getItem(item);
+        model.addAttribute("item", item);
+        return "/carrito/modifica";
+    }
+
+    //Guardar los cambios realizados a la cantidad
+    @PostMapping("/guardar")
+    public String guardar(Item item) {
+        itemService.update(item);
+        return "redirect:/carrito/listado";
     }
 }
