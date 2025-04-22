@@ -20,7 +20,7 @@ public class Producto implements Serializable {
     private double precio;
     private int stock;
     private String imagen;
-    private Boolean estado;
+    boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "idCategoria")

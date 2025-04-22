@@ -101,37 +101,53 @@
             </div>
         </section>
         <!-- 4 Sección para mostrar las tarjetas de los productos -->
-        <section th:fragment="tarjetas">
-            <div class="row row-cols-4 p-2">
-                <div class="card" style="width: 18rem;" th:each="p : ${productos}">
-                    <figure>
-                        <img alt="..." class="card-img-top" height="200" th:src="${p.imagen}"/>
-                        <h5 class="card-title">[[${p.nombre}]]</h5>
-                        <figurecaption class="d-flex justify-content-between">
-                            <span>¢[[${p.precio}]]</span>
-                            <span>([[${p.stock}]])</span>
-                        </figurecaption>
-                    </figure>
+       <section th:fragment="tarjetas">
+    <div class="row row-cols-4 p-2">
+        <div class="card" style="width: 18rem;" th:each="p : ${productos}">
+            <figure>
+                <img alt="..." class="card-img-top" height="200" th:src="${p.imagen}"/>
+                <h5 class="card-title">[[${p.nombre}]]</h5>
+                <figurecaption class="d-flex justify-content-between">
+                    <span>¢[[${p.precio}]]</span>
+                    <span>([[${p.stock}]])</span>
+                </figurecaption>
+            </figure>
 
-                    <div class="card-body">
-                        <h5 class="card-title">[[${p.descripcion}]]</h5>
-                        <p class="card-text" th:text="${p.estado != null and p.estado ? 'Disponible' : 'No Disponible'}"></p>
-                        <button class="btn btn-primary" href="#">
-                            <i class="fas fa-cart-arrow-down"></i>
-                        </button>
-                        <a class="btn btn-success"
-                           th:href="@{/producto/modificar/}+${p.idProducto}">
-                            <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
-                        </a>
-                        <a th:href="@{/producto/eliminar/}+${p.idProducto}">
-                            <button class="btn btn-primary">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </a>
-                    </div>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">[[${p.descripcion}]]</h5>
+                <p class="card-text" th:text="${p.estado != null and p.estado ? 'Disponible' : 'No Disponible'}"></p>
+
+                <!-- ✅ Botón funcional del carrito -->
+                <form>
+                    <input type="hidden" name="idProducto" th:value="${p.idProducto}" />
+                    <input type="hidden" name="existencias" th:value="${p.stock}" />
+                    <button type="button"
+                            onclick="addCart(this.form)"
+                            class="btn btn-primary">
+                        <i class="fas fa-cart-arrow-down"></i>
+                    </button>
+                </form>
+
+                <!-- Botón actualizar -->
+                <a class="btn btn-success"
+                   th:href="@{/producto/modificar/}+${p.idProducto}">
+                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                </a>
+
+                <!-- Botón eliminar -->
+                <a th:href="@{/producto/eliminar/}+${p.idProducto}">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </a>
             </div>
-        </section>
+        </div>
+    </div>
+
+    <!-- ✅ Div que recibe el carrito dinámicamente -->
+    <div id="resultBlock"></div>
+</section>
+
 
         <section th:fragment="editarProducto">
             <div class="row p-3">

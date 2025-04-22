@@ -1,14 +1,15 @@
+<!-- Archivo: tarjetas.html (o el archivo donde mostrás los productos) -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://wwww.tymeleaf.org/tymeleaf-extra-springsegurity6"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/plantilla :: head}">
     <title>Techshop</title>
     <meta charset="UTF-8"/>
-
 </head>
 <body>
-<!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+
+<!-- 1 Sección para crear el botón de agregar... llamará a una ventana modal -->
 <section th:fragment="tabs">
     <div class="row p-3">
         <ul class="nav nav-tabs">
@@ -21,6 +22,7 @@
         </ul>
     </div>
 </section>
+
 <!-- 2 Sección para mostrar las tarjetas de los productos -->
 <section th:fragment="tarjetas">
     <div class="row row-cols-4 p-2">
@@ -28,20 +30,29 @@
             <figure>
                 <img alt="..." class="card-img-top" height="200" th:src="${p.imagen}"/>
                 <figurecaption class="d-flex justify-content-between">
-                    <span>¢[[${p.precio}]]</span>
+                    <span>₡[[${p.precio}]]</span>
                     <span>([[${p.stock}]])</span>
-                </figurecaption>
-            </figure>
+                    <form>
+                        <input type="hidden"
+                               name="idProducto"
+                               th:value="${p.idProducto}"/>
+                        <input type="hidden"
+                               name="existencias"
+                               th:value="${p.stock}"/> <!-- ⚠ aquí está el cambio -->
+                        <button type="button"
+                                onclick="addCart(this.form)"
+                                class="btn btn-light">
+                            <i class="fas fa-cart-arrow-down"></i>
+                        </button>
+                    </form>
 
-            <div class="card-body">
-                <h5 class="card-title">[[${p.descripcion}]]</h5>
-                <p class="card-text">[[${p.estado}]]</p>
-                <button class="btn btn-primary" href="#">
-                    <i class="fas fa-cart-arrow-down"></i>
-                </button>
             </div>
         </div>
     </div>
 </section>
+<!-- Contenedor donde se cargará el carrito al hacer clic en agregar -->
+<div id="resultBlock"></div>
 </body>
+
 </html>
+
