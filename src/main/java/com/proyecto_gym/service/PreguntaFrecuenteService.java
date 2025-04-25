@@ -27,7 +27,7 @@ public class PreguntaFrecuenteService {
     @Transactional(readOnly = true)
     public PreguntaFrecuente getPreguntaFrecuente(PreguntaFrecuente preguntafrecuente) {
         {
-            preguntafrecuente = preguntafrecuenteRepository.findById(preguntafrecuente.getIdPreguntaFrecuente()).orElse(null);
+            preguntafrecuente = preguntafrecuenteRepository.findById(preguntafrecuente.getIdPregunta()).orElse(null);
             return preguntafrecuente;
         }
     }

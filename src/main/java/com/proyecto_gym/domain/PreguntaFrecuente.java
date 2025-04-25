@@ -5,21 +5,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "preguntas_frecuentes") //table name from the db
+@Table(name = "preguntas_frecuentes")
 public class PreguntaFrecuente {
 
-    private static final long serialVersionUID = 1L; //getter autoincremental id
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPregunta;
+    
     private String pregunta;
     private String respuesta;
 
-    public int getIdPreguntaFrecuente() {
+    public int getIdPregunta() {
         return idPregunta;
     }
 
-    public void setIdPreguntaFrecuente(int idPregunta) {
+    public void setIdPregunta(int idPregunta) {
         this.idPregunta = idPregunta;
     }
 
@@ -38,6 +40,4 @@ public class PreguntaFrecuente {
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
-
-}//end class
-
+}

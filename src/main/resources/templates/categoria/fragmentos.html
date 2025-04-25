@@ -9,7 +9,9 @@
 
     <body>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-        <section class="py-4 mb-4 bg-light" th:fragment="btnAgregar">
+        <section sec:authorize='hasRole("ROLE_ADMIN")'
+            class="py-4 mb-4 bg-light"
+                 th:fragment="btnAgregar">
             <div class="container">
                 <div class="row">
                     <div class="card-header text-center">
